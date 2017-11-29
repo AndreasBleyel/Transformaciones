@@ -59,7 +59,7 @@ public class Input {
     public static void main(String[] args) {
         JFrame frame = new JFrame("InputValues");
         frame.setContentPane(new Input().main);
-        frame.setPreferredSize(new Dimension(1000, 500));
+        frame.setPreferredSize(new Dimension(1000, 550));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -284,7 +284,7 @@ public class Input {
                 txt_scalingFijoSy.setVisible(true);
                 lbl_scalFijoPuntoX.setVisible(true);
                 lbl_scalFijoPuntoY.setVisible(true);
-                btn_transform.setText("Scaling Pivot");
+                btn_transform.setText("Scaling Fijo");
                 btn_transform.setEnabled(true);
             }
         });
@@ -314,19 +314,19 @@ public class Input {
                 switch (caso) {
                     case "Caso1":
                         typeOfTransformation = "r1";
-                        btn_transform.setText("Rotacion Caso1");
+                        btn_transform.setText("Reflection Caso1");
                         break;
                     case "Caso2":
                         typeOfTransformation = "r2";
-                        btn_transform.setText("Rotacion Caso2");
+                        btn_transform.setText("Reflection Caso2");
                         break;
                     case "Caso3":
                         typeOfTransformation = "r3";
-                        btn_transform.setText("Rotacion Caso3");
+                        btn_transform.setText("Reflection Caso3");
                         break;
                     case "Caso4":
                         typeOfTransformation = "r4";
-                        btn_transform.setText("Rotacion Caso4");
+                        btn_transform.setText("Reflection Caso4");
                         lbl_Caso4X.setVisible(true);
                         lbl_Caso4Y.setVisible(true);
                         txt_reflectionPuntoX.setVisible(true);
@@ -334,11 +334,11 @@ public class Input {
                         break;
                     case "Caso5":
                         typeOfTransformation = "r5";
-                        btn_transform.setText("Rotacion Caso5");
+                        btn_transform.setText("Reflection Caso5");
                         break;
                     case "Caso6":
                         typeOfTransformation = "r6";
-                        btn_transform.setText("Rotacion Caso6");
+                        btn_transform.setText("Reflection Caso6");
                         break;
                     default:
                         break;
@@ -456,8 +456,6 @@ public class Input {
         Polygon tempTrans = new Polygon();
         Polygon tempRota = new Polygon();
 
-        System.out.printf("x: %d, y: %d", x, y);
-
         double[][] translacionMatrix = new double[][]{
                 {1, 0, x * -1},
                 {0, 1, y * -1},
@@ -481,17 +479,12 @@ public class Input {
             double yt = translacionMatrix[1][0] * polygonStart.xpoints[i] + translacionMatrix[1][1] * polygonStart.ypoints[i] + translacionMatrix[1][2];
             tempTrans.addPoint((int) Math.round(xt), (int) Math.round(yt));
         }
-        System.out.println("\n----");
 
-        outputPolygon(tempTrans);
         for (int i = 0; i < tempTrans.npoints; i++) {
             double xr = rotacion180[0][0] * tempTrans.xpoints[i] + rotacion180[0][1] * tempTrans.ypoints[i];
             double yr = rotacion180[1][0] * tempTrans.xpoints[i] + rotacion180[1][1] * tempTrans.ypoints[i];
             tempRota.addPoint((int) Math.round(xr), (int) Math.round(yr));
         }
-
-        System.out.println("----");
-        outputPolygon(tempRota);
 
         for (int i = 0; i < tempRota.npoints; i++) {
             double xf = translacionMatrixRetour[0][0] * tempRota.xpoints[i] + translacionMatrixRetour[0][1] * tempRota.ypoints[i] + translacionMatrixRetour[0][2];
