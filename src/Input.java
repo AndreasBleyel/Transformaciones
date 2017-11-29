@@ -40,6 +40,7 @@ public class Input {
     private JButton btn_transform;
     private JLabel lbl_tx;
     private JLabel lbl_ty;
+    private JLabel lbl_gradRotationOrigin;
 
     private Polygon polygonStart;
     private Polygon polygonEnd;
@@ -120,7 +121,7 @@ public class Input {
                     default:
                         break;
                 }
-                fillTextArea(txtA_startingPoints,polygonStart);
+                fillTextArea(txtA_startingPoints, polygonStart);
             }
         });
         btn_ResetPolygon.addActionListener(new ActionListener() {
@@ -142,14 +143,20 @@ public class Input {
                         try {
                             int tx = Integer.parseInt(txt_tx.getText());
                             int ty = Integer.parseInt(txt_ty.getText());
-                            translation(tx,ty);
-                        }catch (NumberFormatException e){
+                            translation(tx, ty);
+                        } catch (NumberFormatException e) {
                             JOptionPane.showMessageDialog(null, "Error Not a Number");
                         }
                         break;
                     case "rp":
                         break;
                     case "ro":
+                        try {
+                            int grad = Integer.parseInt(txt_gradRotationOrigin.getText());
+                            rotacionOrigen(grad);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Error Not a Number");
+                        }
                         break;
                     case "sp":
                         break;
@@ -185,18 +192,92 @@ public class Input {
                 btn_transform.setEnabled(true);
             }
         });
+        btn_RotationOrigin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                typeOfTransformation = "ro";
+                txt_gradRotationOrigin.setVisible(true);
+                lbl_gradRotationOrigin.setVisible(true);
+                btn_transform.setText("Rotation Origin");
+                btn_transform.setEnabled(true);
+            }
+        });
     }
 
     private void translation(int tx, int ty) {
-        for(int i=0; i<polygonStart.npoints;i++){
-            int x = polygonStart.xpoints[i]+tx;
-            int y = polygonStart.ypoints[i]+ty;
-            polygonEnd.addPoint(x,y);
+
+        for (int i = 0; i < polygonStart.npoints; i++) {
+            int x = polygonStart.xpoints[i] + tx;
+            int y = polygonStart.ypoints[i] + ty;
+            polygonEnd.addPoint(x, y);
         }
 
         fillTextArea(txtA_endPoints, polygonEnd);
     }
 
+    private void rotacionOrigen(int grad) {
+
+        double[][] rotationMatrix = new double[][]{
+                { Math.cos(grad), Math.sin(grad)*-1 },
+                { Math.sin(grad), Math.cos(grad) }
+        };
+
+
+        System.out.println("Rotation: \n-------");
+        System.out.println(rotationMatrix[0][0]+" "+rotationMatrix[0][1]+"\n"+rotationMatrix[1][0]+" "+rotationMatrix[1][1]);
+        System.out.println("\n--------");
+        double[][] pointToRotate = new double[1][2];
+        for (int i = 0; i < polygonStart.npoints; i++) {
+            pointToRotate[0][0]=polygonStart.xpoints[i];
+            pointToRotate[0][1]=polygonStart.ypoints[i];
+            double[][] result = multiplyByMatrix(pointToRotate, rotationMatrix);
+            polygonEnd.addPoint((int)Math.round(result[0][0]),(int)Math.round(result[0][1]));
+        }
+
+        fillTextArea(txtA_endPoints, polygonEnd);
+
+    }
+
+    private void rotacionPivote() {
+
+    }
+
+    private double[][] multiplyByMatrix(double[][] pointToRotate, double[][] rotationMatrix) {
+
+        int m1ColLength = pointToRotate[0].length; // m1 columns length
+        int m2RowLength = rotationMatrix.length;    // m2 rows length
+
+        if (m1ColLength != m2RowLength) return null; // matrix multiplication is not possible
+
+        int mRRowLength = pointToRotate.length;    // m result rows length
+        int mRColLength = rotationMatrix[0].length; // m result columns length
+
+        double[][] mResult = new double[mRRowLength][mRColLength];
+
+        for (int i = 0; i < mRRowLength; i++) {         // rows from m1
+            for (int j = 0; j < mRColLength; j++) {     // columns from m2
+                for (int k = 0; k < m1ColLength; k++) { // columns from m1
+                    mResult[i][j] += pointToRotate[i][k] * rotationMatrix[k][j];
+                }
+            }
+        }
+
+
+        System.out.println(outputMatrix(mResult));
+
+        return mResult;
+    }
+
+    private String outputMatrix(double matrix[][]){
+        String result = "";
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                result += String.format("%11.2f", matrix[i][j]);
+            }
+            result += "\n";
+        }
+        return result;
+    }
     private void clearFields() {
         txtA_startingPoints.setText("");
         txtA_endPoints.setText("");
@@ -207,11 +288,11 @@ public class Input {
     private void fillTextArea(JTextArea textArea, Polygon polygon) {
         textArea.setText("");
         for (int i = 0; i < polygon.npoints; i++) {
-            textArea.append(i + 1 + " x: " + polygon.xpoints[i] + " y: " + polygon.ypoints[i] + "\n");
+            textArea.append(i + 1 + ": x: " + polygon.xpoints[i] + " y: " + polygon.ypoints[i] + "\n");
         }
     }
 
-    private void setAllInvisible(){
+    private void setAllInvisible() {
         txt_tx.setVisible(false);
         txt_ty.setVisible(false);
     }
