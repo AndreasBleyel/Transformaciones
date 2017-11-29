@@ -104,6 +104,7 @@
             <item value="Rectangle"/>
             <item value="Triangle"/>
             <item value="Five-sided"/>
+            <item value="Tarea"/>
           </model>
         </properties>
       </component>
@@ -183,7 +184,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="86756" class="javax.swing.JTextField" binding="txt_scalingGradS2">
         <constraints>
@@ -191,15 +194,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
-      </component>
-      <component id="11856" class="javax.swing.JTextField" binding="txt_scalingGradGrad">
-        <constraints>
-          <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="487ac" class="javax.swing.JTextField" binding="txt_reflectionPuntoX">
         <constraints>
@@ -207,7 +204,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="dbb68" class="javax.swing.JTextField" binding="txt_rotationPivotY">
         <constraints>
@@ -235,7 +234,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="cfb3e" class="javax.swing.JButton" binding="btn_AddPoint">
         <constraints>
@@ -397,6 +398,42 @@
         </constraints>
         <properties>
           <text value="Pf y"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="555b2" class="javax.swing.JLabel" binding="lbl_scalingGradS1">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="s 1"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="c615e" class="javax.swing.JLabel" binding="lbl_scalingGradS2">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="s 2"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="9d24d" class="javax.swing.JLabel" binding="lbl_Caso4X">
+        <constraints>
+          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="x"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="a1fbb" class="javax.swing.JLabel" binding="lbl_Caso4Y">
+        <constraints>
+          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="y"/>
           <visible value="false"/>
         </properties>
       </component>
