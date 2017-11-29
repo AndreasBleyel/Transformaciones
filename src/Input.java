@@ -35,16 +35,21 @@ public class Input {
     private JTextField txt_scalingFijoPuntoY;
     private JTextField txt_reflectionPuntoY;
     private JPanel main;
-    private JTextArea txtA_allPoints;
-    private JTextArea textArea1;
+    private JTextArea txtA_startingPoints;
+    private JTextArea txtA_endPoints;
     private JButton btn_transform;
+    private JLabel lbl_tx;
+    private JLabel lbl_ty;
 
-    private Polygon polygon;
+    private Polygon polygonStart;
+    private Polygon polygonEnd;
+
+    private String typeOfTransformation;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("InputValues");
         frame.setContentPane(new Input().main);
-        frame.setPreferredSize(new Dimension(800, 400));
+        frame.setPreferredSize(new Dimension(800, 800));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -52,7 +57,9 @@ public class Input {
 
     public Input() {
 
-        polygon = new Polygon();
+        polygonStart = new Polygon();
+        polygonEnd = new Polygon();
+        typeOfTransformation = "";
 
         btn_AddPoint.addActionListener(new ActionListener() {
             @Override
@@ -64,10 +71,9 @@ public class Input {
                     txt_addPointX.setText("");
                     txt_addPointY.setText("");
 
-                    polygon.addPoint(x, y);
+                    polygonStart.addPoint(x, y);
 
-                    txtA_allPoints.append(polygon.npoints + " x: " + x + " y: " + y + "\n");
-
+                    fillTextArea(txtA_startingPoints, polygonStart);
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Error Not a Number");
                 }
@@ -78,76 +84,135 @@ public class Input {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
-                polygon.reset();
+                polygonStart.reset();
                 clearFields();
 
                 String choosenPolygon = cmb_Polygon.getSelectedItem().toString();
                 switch (choosenPolygon) {
                     case "Rectangle":
-                        polygon.addPoint(5, 5);
-                        txtA_allPoints.append(polygon.npoints + " x: 5  y: 5\n");
+                        polygonStart.addPoint(5, 5);
 
-                        polygon.addPoint(5, 10);
-                        txtA_allPoints.append(polygon.npoints + " x: 5  y: 10\n");
+                        polygonStart.addPoint(5, 10);
 
-                        polygon.addPoint(10, 5);
-                        txtA_allPoints.append(polygon.npoints + " x: 10  y: 5\n");
+                        polygonStart.addPoint(10, 5);
 
-                        polygon.addPoint(10, 10);
-                        txtA_allPoints.append(polygon.npoints + " x: 10  y: 10\n");
+                        polygonStart.addPoint(10, 10);
 
                         break;
                     case "Triangle":
-                        polygon.addPoint(5, 5);
-                        txtA_allPoints.append(polygon.npoints + " x: 5  y: 5\n");
+                        polygonStart.addPoint(5, 5);
 
-                        polygon.addPoint(7, 10);
-                        txtA_allPoints.append(polygon.npoints + " x: 7  y: 10\n");
+                        polygonStart.addPoint(7, 10);
 
-                        polygon.addPoint(12, 6);
-                        txtA_allPoints.append(polygon.npoints + " x: 12  y: 6\n");
+                        polygonStart.addPoint(12, 6);
                         break;
                     case "Five-sided":
-                        polygon.addPoint(5, 5);
-                        txtA_allPoints.append(polygon.npoints + " x: 5  y: 5\n");
+                        polygonStart.addPoint(5, 5);
 
-                        polygon.addPoint(3, 10);
-                        txtA_allPoints.append(polygon.npoints + " x: 3  y: 10\n");
+                        polygonStart.addPoint(3, 10);
 
-                        polygon.addPoint(7, 11);
-                        txtA_allPoints.append(polygon.npoints + " x: 7  y: 11\n");
+                        polygonStart.addPoint(7, 11);
 
-                        polygon.addPoint(10, 2);
-                        txtA_allPoints.append(polygon.npoints + " x: 10  y: 2\n");
+                        polygonStart.addPoint(10, 2);
 
-                        polygon.addPoint(7, 7);
-                        txtA_allPoints.append(polygon.npoints + " x: 7  y: 7\n");
+                        polygonStart.addPoint(7, 7);
                         break;
                     default:
                         break;
                 }
+                fillTextArea(txtA_startingPoints,polygonStart);
             }
         });
         btn_ResetPolygon.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                polygon.reset();
+                polygonStart.reset();
                 clearFields();
+            }
+        });
+        btn_transform.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                txtA_endPoints.setText("");
+                polygonEnd.reset();
+
+                switch (typeOfTransformation) {
+                    case "t":
+                        try {
+                            int tx = Integer.parseInt(txt_tx.getText());
+                            int ty = Integer.parseInt(txt_ty.getText());
+                            translation(tx,ty);
+                        }catch (NumberFormatException e){
+                            JOptionPane.showMessageDialog(null, "Error Not a Number");
+                        }
+                        break;
+                    case "rp":
+                        break;
+                    case "ro":
+                        break;
+                    case "sp":
+                        break;
+                    case "sg":
+                        break;
+                    case "r1":
+                        break;
+                    case "r2":
+                        break;
+                    case "r3":
+                        break;
+                    case "r4":
+                        break;
+                    case "r5":
+                        break;
+                    case "r6":
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Error no method choosen");
+                        break;
+                }
+            }
+        });
+        btn_Translation.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                typeOfTransformation = "t";
+                txt_tx.setVisible(true);
+                txt_ty.setVisible(true);
+                lbl_tx.setVisible(true);
+                lbl_ty.setVisible(true);
+                btn_transform.setText("Translation");
+                btn_transform.setEnabled(true);
             }
         });
     }
 
+    private void translation(int tx, int ty) {
+        for(int i=0; i<polygonStart.npoints;i++){
+            int x = polygonStart.xpoints[i]+tx;
+            int y = polygonStart.ypoints[i]+ty;
+            polygonEnd.addPoint(x,y);
+        }
+
+        fillTextArea(txtA_endPoints, polygonEnd);
+    }
+
     private void clearFields() {
-        txtA_allPoints.setText("");
+        txtA_startingPoints.setText("");
+        txtA_endPoints.setText("");
         txt_addPointX.setText("");
         txt_addPointY.setText("");
     }
 
-    public Polygon getPolygon() {
-        return polygon;
+    private void fillTextArea(JTextArea textArea, Polygon polygon) {
+        textArea.setText("");
+        for (int i = 0; i < polygon.npoints; i++) {
+            textArea.append(i + 1 + " x: " + polygon.xpoints[i] + " y: " + polygon.ypoints[i] + "\n");
+        }
     }
 
-    public void setPolygon(Polygon polygon) {
-        this.polygon = polygon;
+    private void setAllInvisible(){
+        txt_tx.setVisible(false);
+        txt_ty.setVisible(false);
     }
 }
