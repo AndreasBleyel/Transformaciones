@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Input">
-  <grid id="27dc6" binding="main" layout-manager="GridLayoutManager" row-count="13" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="main" layout-manager="GridLayoutManager" row-count="13" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="1324" height="467"/>
@@ -137,13 +137,15 @@
           <visible value="false"/>
         </properties>
       </component>
-      <component id="2d34" class="javax.swing.JTextField" binding="txt_gradRotationPivot">
+      <component id="2d34" class="javax.swing.JTextField" binding="txt_rotationPivotX">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="1b1a8" class="javax.swing.JTextField" binding="txt_scalingFijoSx">
         <constraints>
@@ -151,7 +153,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="b40" class="javax.swing.JTextField" binding="txt_scalingFijoSy">
         <constraints>
@@ -159,15 +163,19 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="ecf4b" class="javax.swing.JTextField" binding="txt_scalingFijoPuntoX">
         <constraints>
-          <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="5ca68" class="javax.swing.JTextField" binding="txt_scalingGradS1">
         <constraints>
@@ -187,7 +195,7 @@
       </component>
       <component id="11856" class="javax.swing.JTextField" binding="txt_scalingGradGrad">
         <constraints>
-          <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -201,25 +209,29 @@
         </constraints>
         <properties/>
       </component>
-      <component id="dbb68" class="javax.swing.JTextField" binding="txt_pivoteRotationPivot">
+      <component id="dbb68" class="javax.swing.JTextField" binding="txt_rotationPivotY">
         <constraints>
           <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="a3765" class="javax.swing.JTextField" binding="txt_scalingFijoPuntoY">
         <constraints>
-          <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="3" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <visible value="false"/>
+        </properties>
       </component>
       <component id="37f0c" class="javax.swing.JTextField" binding="txt_reflectionPuntoY">
         <constraints>
-          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -331,6 +343,60 @@
         </constraints>
         <properties>
           <text value="Grad"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="8232c" class="javax.swing.JLabel" binding="lbl_rotationPivotX">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Pivot X"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="29d16" class="javax.swing.JLabel" binding="lbl_rotationPivotY">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Pivot Y"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="2a3f" class="javax.swing.JLabel" binding="lbl_scalFijoSX">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="s x"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="8f9c8" class="javax.swing.JLabel" binding="lbl_scalFijoSY">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="s y"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="41b09" class="javax.swing.JLabel" binding="lbl_scalFijoPuntoX">
+        <constraints>
+          <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Pf x"/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="f98f7" class="javax.swing.JLabel" binding="lbl_scalFijoPuntoY">
+        <constraints>
+          <grid row="3" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Pf y"/>
           <visible value="false"/>
         </properties>
       </component>
